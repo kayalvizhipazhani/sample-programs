@@ -1,0 +1,169 @@
+import java.lang.Math;
+import java.util.Scanner;
+import java.util.*;
+
+public class Test1
+{
+    public static void main(String args[])
+    {
+        //create a hash map used to players scorecord
+        Map<String,Integer> scorecard=new HashMap<>();
+        //using to queue and linkedlist store the all players and creating the object
+        Queue<String> batsmen=new LinkedList();
+        //all player are added to queue
+        batsmen.add("Rohith");
+        batsmen.add("Dhawan");
+        batsmen.add("Kohli");
+        batsmen.add("Dhoni");
+        batsmen.add("Pant");
+        batsmen.add("Rahul");
+        batsmen.add("Jadeja");
+        batsmen.add("Ashwin");
+        batsmen.add("Pandya");
+        batsmen.add("Bumrah");
+        batsmen.add("DK");
+               
+   //initialize to all variables and values
+        int t,s1=0,s2=0,tot=0,i,j;
+   //remove() method used to returns of the queue    
+         String p1=batsmen.remove();
+         String p2=batsmen.remove();
+    //random numbers and character generate    
+         Random ran = new Random();
+        Scanner sc = new Scanner(System.in);
+        final String alphabet = "HT";
+        System.out.printf("enter H for Head or T for Tail");
+      char ch = sc.next().charAt(0);
+        if(ch!=(alphabet.charAt(ran.nextInt(2))))
+        {
+        System.out.println("you lose");
+          int max = 6;
+        int min = -1;
+        int range = max - min + 1;
+   //using to boolean operator declare the onstrike for true and allout for false    
+        boolean onstrike=true;
+        boolean allout=false;
+   //outer loop is run to 20 overs
+        for( j=0;j<20;j++)
+        {
+            //each time loop running to show the overs
+            System.out.println("--------Over number"+(j+1)+"-------");
+            //checking condition for first batsbam is onstrike are not
+            if(onstrike)
+            //display the first batsman is onstrike
+             System.out.println(p1+"-on strike");
+             //display the second batsman is on strike
+             else
+             System.out.println(p2+"-on strike");
+             //inner loop for running the 6 balls
+        for( i=0;i<6;i++)
+        {
+                       
+            int r= (int)(Math.random() * range) + min;
+            //add runs
+           /* tot+=r;
+            if(r==-1)
+            tot+=1;*/
+            if(r!=-1)
+            tot+=r;
+           
+
+           if(onstrike)
+           {
+               
+           
+               if(r==1 ||r==3 || r==5)
+            {
+                onstrike=false;
+                System.out.println("over"+j+"."+(i+1)+"- runs:"+r);
+                System.out.println(p2+"-on strike");
+               s1+=r;
+               continue;
+            }
+            //print overs ,balls and runs
+                System.out.println("over"+j+"."+(i+1)+"- runs:"+r);
+                s1+=r;
+                if(r==-1 && onstrike)
+            {
+                //onstrike batsman is out display scorecard
+                scorecard.put(p1,s1+1);
+                //disply the first batsman out and runs
+                System.out.println(p1+"--out--"+(s1+1));
+                //again declare new batsman run is zero
+                s1=0;
+                //peek() method is used is used to view the head of queue without removing it
+                //if condition checked for allout or not
+                if(batsmen.peek()!=null)
+                {
+                    //again declare new batsman
+                    //remove() method used to returns of the queue  
+                    p1=batsmen.remove();
+                    //print the new batsman
+                    System.out.println("New Batsman to the crease-"+p1);
+                 }    
+                else{
+                    allout=true;
+                break;
+                    }
+            }
+          }
+          //else part is onstrike is false
+          else
+          {
+             
+               if(r==1 ||r==3  ||r==5)
+            {
+                onstrike=true;
+                System.out.println("over"+j+"."+(i+1)+"- runs:"+r);
+                System.out.println(p1+"-on strike");
+            s2=(s2+r);
+            continue;
+            }
+            System.out.println("over"+j+"."+(i+1)+"- runs:"+r);
+            s2=(s2+r);
+            if(r==-1)
+            {
+                scorecard.put(p2,s2+1);
+                System.out.println(p2+"--out--"+(s2+1));
+                s2=0;
+                if(batsmen.peek()!=null)
+                {
+                p2=batsmen.remove();
+                System.out.println("New Batsman to the crease-"+p2);
+                }
+                else
+                {
+                allout=true;
+                break;
+                }
+            }
+            }
+           
+       
+        }
+        //check to the allout condition
+             if(allout)
+        {
+            System.out.println("AllOut");
+            //if condition check to the not out batsman is
+            if(!onstrike)
+                   scorecard.put(p1+"*",s1);
+                   else
+                   scorecard.put(p2+"*",s2);
+             break;
+          }
+          //each over is complete change non-strike to onstrike
+          onstrike=!onstrike;
+    }
+ 
+     
+        System.out.println("Scorecard:"+scorecard);
+          System.out.println("total runs:"+tot);
+    }
+    else
+    {
+        System.out.println("you win");
+    }
+   
+    //System.out.println(alphabet.charAt(ran.nextInt(2)));
+}}
