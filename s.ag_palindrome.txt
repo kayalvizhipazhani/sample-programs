@@ -1,0 +1,54 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+ 
+#include <iostream>
+
+using namespace std;
+bool palindrom(string s)
+{
+    int n = s.length();
+    for(int i=0;i<n/2;i++)
+    {
+        if(s[i]!=s[n-1])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+void fun(string str)
+{
+   // string temp = str;
+    int arr[str.length()],x=0;
+    for(int i=0;i<str.length();i++)
+    {
+        string s="";
+        for(int j=0;j<str.length();j++)
+        {
+            if(j!=i)
+            s+=str[j];
+        }
+        if(palindrom(s)==true)
+        {
+            arr[x++]=i;
+        }
+    }
+    for(int i=0;i<x;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+}
+
+int main()
+{
+    string str;
+    cin>>str;
+    fun(str);
+    return 0;
+}
+

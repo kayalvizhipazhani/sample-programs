@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+int countnum(int x)
+{
+int count=0;
+while(x!=0)
+{
+count++;
+x=x/10;
+}
+return count;
+}
+
+
+int main()
+{
+int m,n,p,tc;
+cout<<"enter the testcase:";
+cin>>tc;
+cout<<"enter the numbers:";
+for(int i=0;i<tc;i++)
+{
+cin>>m>>n;
+p=m+n;
+if(countnum(n)==countnum(p))
+cout<<"n:"<<n;
+else
+cout<<"m+n:"<<p;
+}
+}
